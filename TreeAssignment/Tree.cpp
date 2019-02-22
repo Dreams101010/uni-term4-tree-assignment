@@ -170,59 +170,6 @@ void Tree<T>::TreeUnionPreorderFrom(Tree<T>& unionTo) // add element from this t
 }
 
 template <class T>
-void Tree<T>::RemoveNodeFromVector(std::shared_ptr<Node<T>> node)
-{
-	bool found = false;
-	unsigned int idx = 0;
-	for (unsigned int i = 0; i < tree.size(); i++)
-	{
-		if (tree[i] == node)
-		{
-			idx = i;
-			found = true;
-			break;
-		}
-	}
-	if (!found)
-	{ 
-		throw std::invalid_argument("Couldn't find node in internal vector.");
-	}
-	auto iter = tree.cbegin();
-	iter += idx;
-	tree.erase(iter);
-}
-
-template <class T>
-Tree<T>::Tree() {}
-
-template <class T>
-Tree<T>::Tree(std::vector<T> vec)
-{
-	for (int i : vec)
-	{
-		Add(i);
-	}
-}
-
-template <class T>
-Tree<T>::Tree(std::shared_ptr<std::vector<T>> vec)
-{
-	for (int i = 0; i < vec->size(); i++)
-	{
-		Add(vec->at(i));
-	}
-}
-
-template <class T>
-void Tree<T>::Add(T data)
-{
-	std::shared_ptr<Node<T>> node(new Node<T>());
-	node->data = data;
-	node->parent = AddFindParent(data);
-	tree.push_back(node);
-}
-
-template <class T>
 std::shared_ptr<Node<T>>Tree<T>::GetNode(T data)
 {
 	if (tree.empty())
@@ -246,18 +193,6 @@ std::shared_ptr<Node<T>>Tree<T>::GetNode(T data)
 		}
 	}
 	return NULL;
-}
-
-template <class T>
-bool Tree<T>::IsEmpty()
-{
-	return tree.empty();
-}
-
-template <class T>
-bool Tree<T>::Contains(T data)
-{
-	return GetNode(data) != NULL;
 }
 
 template <class T>
@@ -296,6 +231,71 @@ T Tree<T>::Remove(std::shared_ptr<Node<T>> ptr)
 		RemoveNodeFromVector(ptr);
 	}
 	return retVal;
+}
+
+template <class T>
+void Tree<T>::RemoveNodeFromVector(std::shared_ptr<Node<T>> node)
+{
+	bool found = false;
+	unsigned int idx = 0;
+	for (unsigned int i = 0; i < tree.size(); i++)
+	{
+		if (tree[i] == node)
+		{
+			idx = i;
+			found = true;
+			break;
+		}
+	}
+	if (!found)
+	{ 
+		throw std::invalid_argument("Couldn't find node in internal vector.");
+	}
+	auto iter = tree.cbegin();
+	iter += idx;
+	tree.erase(iter);
+}
+
+template <class T>
+Tree<T>::Tree() {}
+
+template <class T>
+Tree<T>::Tree(std::vector<T> vec)
+{
+	for (int i : vec)
+	{
+		Add(i);
+	}
+}
+
+template <class T>
+Tree<T>::Tree(std::shared_ptr<std::vector<T>> vec)
+{
+	for (unsigned int i = 0; i < vec->size(); i++)
+	{
+		Add(vec->at(i));
+	}
+}
+
+template <class T>
+void Tree<T>::Add(T data)
+{
+	std::shared_ptr<Node<T>> node(new Node<T>());
+	node->data = data;
+	node->parent = AddFindParent(data);
+	tree.push_back(node);
+}
+
+template <class T>
+bool Tree<T>::IsEmpty()
+{
+	return tree.empty();
+}
+
+template <class T>
+bool Tree<T>::Contains(T data)
+{
+	return GetNode(data) != NULL;
 }
 
 template <class T>

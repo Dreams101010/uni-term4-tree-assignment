@@ -19,16 +19,17 @@ class Tree
 	void PostorderTraversal(std::shared_ptr<Node<T>> node);
 	void TreeUnionPreorderFrom(Tree<T>& unionTo, std::shared_ptr<Node<T>> node);
 	void TreeUnionPreorderFrom(Tree<T>& unionTo); // add element from this tree to other
+	std::shared_ptr<Node<T>> GetNode(T data);
+	T Remove(std::shared_ptr<Node<T>> ptr);
 	void RemoveNodeFromVector(std::shared_ptr<Node<T>> node);
+
 public:
 	Tree();
 	Tree(std::vector<T> vec);
 	Tree(std::shared_ptr<std::vector<T>> vec);
 	void Add(T data);
-	std::shared_ptr<Node<T>> GetNode(T data);
 	bool IsEmpty();
 	bool Contains(T data);
-	T Remove(std::shared_ptr<Node<T>> ptr);
 	T Remove(T data);
 	void PreorderTraversal();
 	void InorderTraversal();

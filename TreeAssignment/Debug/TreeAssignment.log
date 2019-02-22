@@ -1,2 +1,13 @@
-﻿  TreeAssignment.cpp
+﻿  pch.cpp
+  Tree.cpp
+d:\study\visual studio projects\c++\university assignments\non-linear ds\treeassignment\treeassignment\tree.cpp(274): warning C4018: '<': signed/unsigned mismatch
+  d:\study\visual studio projects\c++\university assignments\non-linear ds\treeassignment\treeassignment\tree.cpp(273): note: while compiling class template member function 'Tree<int>::Tree(std::shared_ptr<std::vector<T,std::allocator<_Ty>>>)'
+          with
+          [
+              T=int,
+              _Ty=int
+          ]
+  d:\study\visual studio projects\c++\university assignments\non-linear ds\treeassignment\treeassignment\tree.cpp(348): note: see reference to class template instantiation 'Tree<int>' being compiled
+  TreeAssignment.cpp
+  Generating Code...
   TreeAssignment.vcxproj -> D:\Study\Visual Studio Projects\C++\University Assignments\Non-linear DS\TreeAssignment\Debug\TreeAssignment.exe
