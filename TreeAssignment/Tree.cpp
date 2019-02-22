@@ -2,10 +2,10 @@
 #include <vector>
 #include <memory>
 #include <iostream>
-#include "Node.h"
-#include "Tree.h"
 #include <exception>
 #include <stdexcept>
+#include "Node.h"
+#include "Tree.h"
 
 template <class T>
 std::shared_ptr<Node<T>> Tree<T>::FindLeftChild(std::shared_ptr<Node<T>> parent)
@@ -120,9 +120,9 @@ void Tree<T>::InorderTraversal(std::shared_ptr<Node<T>> node)
 {
 	if (node != NULL)
 	{
-		PreorderTraversal(FindLeftChild(node));
+		InorderTraversal(FindLeftChild(node));
 		std::cout << node->data << " ";
-		PreorderTraversal(FindRightChild(node));
+		InorderTraversal(FindRightChild(node));
 	}
 }
 
@@ -131,8 +131,8 @@ void Tree<T>::PostorderTraversal(std::shared_ptr<Node<T>> node)
 {
 	if (node != NULL)
 	{
-		PreorderTraversal(FindLeftChild(node));
-		PreorderTraversal(FindRightChild(node));
+		PostorderTraversal(FindLeftChild(node));
+		PostorderTraversal(FindRightChild(node));
 		std::cout << node->data << " ";
 	}
 }
@@ -193,6 +193,27 @@ void Tree<T>::RemoveNodeFromVector(std::shared_ptr<Node<T>> node)
 }
 
 template <class T>
+Tree<T>::Tree() {}
+
+template <class T>
+Tree<T>::Tree(std::vector<T> vec)
+{
+	for (int i : vec)
+	{
+		Add(i);
+	}
+}
+
+template <class T>
+Tree<T>::Tree(std::shared_ptr<std::vector<T>> vec)
+{
+	for (int i = 0; i < vec->size(); i++)
+	{
+		Add(vec->at(i));
+	}
+}
+
+template <class T>
 void Tree<T>::Add(T data)
 {
 	std::shared_ptr<Node<T>> node(new Node<T>());
@@ -242,6 +263,7 @@ bool Tree<T>::Contains(T data)
 template <class T>
 T Tree<T>::Remove(std::shared_ptr<Node<T>> ptr)
 {
+	// TODO: check if pointer is actually in vector
 	if (ptr == NULL)
 	{
 		throw std::invalid_argument("Pointer was null.");
@@ -255,7 +277,7 @@ T Tree<T>::Remove(std::shared_ptr<Node<T>> ptr)
 		T valueOfNextNode = Remove(nextNode);
 		ptr->data = valueOfNextNode;
 		// we need to remove nextNode for case when it is not a leaf (but has a single child)
-		// consider the following tree sequence: 10 15 14 12 13
+		// consider the following tree sequence: 10 9 15 14 12 13 (remove 10)
 	}
 	else if (leftChild != NULL || rightChild != NULL) // only one of them
 	{

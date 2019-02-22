@@ -21,6 +21,9 @@ class Tree
 	void TreeUnionPreorderFrom(Tree<T>& unionTo); // add element from this tree to other
 	void RemoveNodeFromVector(std::shared_ptr<Node<T>> node);
 public:
+	Tree();
+	Tree(std::vector<T> vec);
+	Tree(std::shared_ptr<std::vector<T>> vec);
 	void Add(T data);
 	std::shared_ptr<Node<T>> GetNode(T data);
 	bool IsEmpty();
