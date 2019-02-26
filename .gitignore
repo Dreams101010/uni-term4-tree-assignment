@@ -31,7 +31,7 @@
 *.out
 *.app
 
-/.vs/*.*
+/.vs
 /.vs/TreeAssignment/v15/Browse.VC.opendb
 /.vs/TreeAssignment/v15
 /Debug
@@ -39,3 +39,7 @@
 /TreeAssignment/Debug
 /TreeAssignment/Release
 /Release
+*.tlog
+/TreeAssignment/TreeAssignment.vcxproj
+/TreeAssignment/TreeAssignment.vcxproj.filters
+/TreeAssignment/TreeAssignment.vcxproj.user
