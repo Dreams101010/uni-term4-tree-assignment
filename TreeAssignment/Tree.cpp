@@ -10,7 +10,7 @@
 template <class T>
 std::shared_ptr<Node<T>> Tree<T>::FindLeftChild(std::shared_ptr<Node<T>> parent)
 {
-	std::shared_ptr<Node<T>> retVal = NULL;
+	std::shared_ptr<Node<T>> retVal = nullptr;
 	for (unsigned int i = 0; i < tree.size(); i++)
 	{
 		if (tree[i]->parent == parent)
@@ -28,7 +28,7 @@ std::shared_ptr<Node<T>> Tree<T>::FindLeftChild(std::shared_ptr<Node<T>> parent)
 template <class T>
 std::shared_ptr<Node<T>> Tree<T>::FindRightChild(std::shared_ptr<Node<T>> parent)
 {
-	std::shared_ptr<Node<T>> retVal = NULL;
+	std::shared_ptr<Node<T>> retVal = nullptr;
 	for (unsigned int i = 0; i < tree.size(); i++)
 	{
 		if (tree[i]->parent == parent)
@@ -48,12 +48,12 @@ std::shared_ptr<Node<T>> Tree<T>::AddFindParent(T data)
 {
 	if (tree.empty())
 	{
-		return NULL;
+		return nullptr;
 	}
 	std::shared_ptr<Node<T>> x = tree[0]; // root
 	while (true)
 	{
-		std::shared_ptr<Node<T>> y = NULL;
+		std::shared_ptr<Node<T>> y = nullptr;
 		if (data < x->data)
 		{
 			y = FindLeftChild(x);
@@ -67,7 +67,7 @@ std::shared_ptr<Node<T>> Tree<T>::AddFindParent(T data)
 			throw std::invalid_argument("Couldn't add node to tree. Node with this data already exists.");
 		}
 
-		if (y == NULL) // sub-tree is empty
+		if (y == nullptr) // sub-tree is empty
 		{
 			return x;
 		}
@@ -83,7 +83,7 @@ std::shared_ptr<Node<T>> Tree<T>::FindMinimum(std::shared_ptr<Node<T>> subTreeRo
 {
 	auto curNode = subTreeRoot;
 	auto nextNode = FindLeftChild(curNode);
-	while (nextNode != NULL)
+	while (nextNode != nullptr)
 	{
 		curNode = nextNode;
 		nextNode = FindLeftChild(curNode);
@@ -96,7 +96,7 @@ std::shared_ptr<Node<T>> Tree<T>::FindMaximum(std::shared_ptr<Node<T>> subTreeRo
 {
 	auto curNode = subTreeRoot;
 	auto nextNode = FindRightChild(curNode);
-	while (nextNode != NULL)
+	while (nextNode != nullptr)
 	{
 		curNode = nextNode;
 		nextNode = FindRightChild(curNode);
@@ -107,7 +107,7 @@ std::shared_ptr<Node<T>> Tree<T>::FindMaximum(std::shared_ptr<Node<T>> subTreeRo
 template <class T>
 void Tree<T>::PreorderTraversal(std::shared_ptr<Node<T>> node)
 {
-	if (node != NULL)
+	if (node != nullptr)
 	{
 		std::cout << node->data << " ";
 		PreorderTraversal(FindLeftChild(node));
@@ -118,7 +118,7 @@ void Tree<T>::PreorderTraversal(std::shared_ptr<Node<T>> node)
 template <class T>
 void Tree<T>::InorderTraversal(std::shared_ptr<Node<T>> node)
 {
-	if (node != NULL)
+	if (node != nullptr)
 	{
 		InorderTraversal(FindLeftChild(node));
 		std::cout << node->data << " ";
@@ -129,7 +129,7 @@ void Tree<T>::InorderTraversal(std::shared_ptr<Node<T>> node)
 template <class T>
 void Tree<T>::PostorderTraversal(std::shared_ptr<Node<T>> node)
 {
-	if (node != NULL)
+	if (node != nullptr)
 	{
 		PostorderTraversal(FindLeftChild(node));
 		PostorderTraversal(FindRightChild(node));
@@ -140,7 +140,7 @@ void Tree<T>::PostorderTraversal(std::shared_ptr<Node<T>> node)
 template <class T>
 void Tree<T>::TreeUnionPreorderFrom(Tree<T>& unionTo, std::shared_ptr<Node<T>> node)
 {
-	if (node != NULL)
+	if (node != nullptr)
 	{
 		if (unionTo.Contains(node->data))
 		{
@@ -174,10 +174,10 @@ std::shared_ptr<Node<T>>Tree<T>::GetNode(T data)
 {
 	if (tree.empty())
 	{
-		return NULL;
+		return nullptr;
 	}
 	std::shared_ptr<Node<T>> curNode = tree[0];
-	while (curNode != NULL)
+	while (curNode != nullptr)
 	{
 		if (data == curNode->data)
 		{
@@ -192,21 +192,20 @@ std::shared_ptr<Node<T>>Tree<T>::GetNode(T data)
 			curNode = FindRightChild(curNode);
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 template <class T>
 T Tree<T>::Remove(std::shared_ptr<Node<T>> ptr)
 {
-	// TODO: check if pointer is actually in vector
-	if (ptr == NULL)
+	if (ptr == nullptr)
 	{
-		throw std::invalid_argument("Pointer was null.");
+		throw std::invalid_argument("Remove: Pointer was nullptr.");
 	}
 	std::shared_ptr<Node<T>> leftChild = FindLeftChild(ptr);
 	std::shared_ptr<Node<T>> rightChild = FindRightChild(ptr);
 	T retVal = ptr->data;
-	if (leftChild != NULL && rightChild != NULL)
+	if (leftChild != nullptr && rightChild != nullptr)
 	{
 		auto nextNode = FindMinimum(rightChild); // minimum is either a leaf or has a single child
 		T valueOfNextNode = Remove(nextNode);
@@ -214,13 +213,13 @@ T Tree<T>::Remove(std::shared_ptr<Node<T>> ptr)
 		// we need to remove nextNode for case when it is not a leaf (but has a single child)
 		// consider the following tree sequence: 10 9 15 14 12 13 (remove 10)
 	}
-	else if (leftChild != NULL || rightChild != NULL) // only one of them
+	else if (leftChild != nullptr || rightChild != nullptr) // only one of them
 	{
-		if (leftChild != NULL)
+		if (leftChild != nullptr)
 		{
 			leftChild->parent = ptr->parent;
 		}
-		else // rightChild != NULL
+		else // rightChild != nullptr
 		{
 			rightChild->parent = ptr->parent;
 		}
@@ -295,7 +294,7 @@ bool Tree<T>::IsEmpty()
 template <class T>
 bool Tree<T>::Contains(T data)
 {
-	return GetNode(data) != NULL;
+	return GetNode(data) != nullptr;
 }
 
 template <class T>
