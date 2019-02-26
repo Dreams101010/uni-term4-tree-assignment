@@ -33,3 +33,9 @@
 
 /.vs/*.*
 /.vs/TreeAssignment/v15/Browse.VC.opendb
+/.vs/TreeAssignment/v15
+/Debug
+/TreeAssignment/Debug/GraphAssignment.tlog
+/TreeAssignment/Debug
+/TreeAssignment/Release
+/Release
