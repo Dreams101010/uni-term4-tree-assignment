@@ -1,3 +1,0 @@
-﻿  pch.cpp
-  Tree.cpp
-d:\study\visual studio projects\c++\university assignments\non-linear ds\treeassignment\treeassignment\node.h(9): warning C26495: Variable 'Node<int>::data' is uninitialized. Always initialize a member variable (type.6).
